@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+</head>
+<body>
+	<p th:text="'Hello, ' + ${name} + '!'" />
+	<canvas id="bar-chart" width="800" height="450"></canvas>
+	<script th:inline="javascript">
+	console.log([[${name}]]);
+		// Bar chart
+		var disk = [[${computador.disk}]]
+		var diskFree = 100 -parseInt(disk);
+		new Chart(document.getElementById("bar-chart"), {
+			type : 'doughnut',
+			data : {
+				labels : [ "Capacidad", "free" ],
+				datasets : [ {
+					label : "Population (millions)",
+					backgroundColor : [ "#3e95cd","#8e5ea2" ],
+					data : [ disk, diskFree  ]
+				} ]
+			},
+			options : {
+				legend : {
+					display : false
+				},
+				title : {
+					display : true,
+					text : 'Predicted world population (millions) in 2050'
+				}
+			}
+		});
+	</script>
+</body>
+</html>
